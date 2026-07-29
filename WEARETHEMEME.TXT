@@ -1,0 +1,220 @@
+///////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
+WE ARE THE MEME...
+
+////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+
+using System;
+using System.IO;
+using System.Reflection;
+using System.Runtime.InteropServices;
+
+namespace ConsoleApplication4
+{
+	/// <summary>
+	/// Summary description for Class1.
+	/// </summary>
+	class Class1
+	{
+		/// <summary>
+		/// The main entry point for the application.
+		/// </summary>
+		[STAThread]
+		static void Main(string[] args)
+		{
+			Type fIT = Type.GetTypeFromProgID("IMAPI2FS.MsftFileSystemImage");
+			object oFI = Activator.CreateInstance(fIT);
+			fIT.InvokeMember("ChooseImageDefaultsForMediaType", BindingFlags.InvokeMethod, null, oFI, new object[] { 3 });
+			object rootfldr = fIT.InvokeMember("Root", BindingFlags.GetProperty, null, oFI, null);
+			object[] addTree = new object[] {@"C:\SRC", false};
+			rootfldr.GetType().InvokeMember("AddTree",BindingFlags.InvokeMethod,null,rootfldr,addTree);
+			object resultImage = fIT.InvokeMember("CreateResultImage",BindingFlags.InvokeMethod,null,oFI,null);
+			UCOMIStream comStream = (UCOMIStream) resultImage.GetType().InvokeMember("ImageStream",BindingFlags.GetProperty,null,resultImage,null);
+			FileStream fs = new FileStream(@"C:\lol.iso",FileMode.Create,FileAccess.Write);
+			byte[] buffer = new byte[4096];
+			int bytesRead = 0;
+			IntPtr pcbRead = Marshal.AllocCoTaskMem(Marshal.SizeOf(typeof(int)));
+			try
+			{
+				while (true)
+				{
+					comStream.Read(buffer,buffer.Length,pcbRead);
+					bytesRead = Marshal.ReadInt32(pcbRead);
+					if (bytesRead == 0)
+					{
+						break;
+					}
+					fs.Write(buffer,0,bytesRead);
+				}
+			}
+			finally
+			{
+				Marshal.FreeCoTaskMem(pcbRead);
+				fs.Flush();
+				fs.Close();
+			}
+		}
+	}
+}
+
+////////////////////////////////////////
+///////////////////////////////////////
+
+using System;
+using System.IO;
+using System.Reflection;
+using System.Threading;
+
+namespace ConsoleApplication2
+{
+	/// <summary>
+	/// Summary description for Class1.
+	/// </summary>
+	class Class1
+	{
+		/// <summary>
+		/// The main entry point for the application.
+		/// </summary>
+		[STAThread]
+		static void Main(string[] args)
+		{
+			string path = @"C:\zap.zip";
+			if (File.Exists(path))
+			{
+				;
+			}
+			else
+			{
+				byte[] emptyzip = new byte[]{80,75,5,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+				FileStream fs = File.Create(@"C:\zap.zip");
+				fs.Write(emptyzip,0,emptyzip.Length);
+				fs.Flush();
+				fs.Close();
+				fs = null;
+			}
+			// can insert to zips
+			Type shellType = Type.GetTypeFromProgID("Shell.Application");
+			object shell = Activator.CreateInstance(shellType);
+			object ourFolder = shellType.InvokeMember("NameSpace",BindingFlags.InvokeMethod, null, shell, new object[] {@"C:\lel"});
+			object ourZip = shellType.InvokeMember("NameSpace",BindingFlags.InvokeMethod, null, shell, new object[] {@"C:\zap.zip"});
+			object inZip = shellType.InvokeMember("CopyHere",BindingFlags.InvokeMethod, null, ourZip, new object[] {ourFolder,20});
+			Thread.Sleep(5555);
+			try
+			{
+				shellType = null;
+				shell = null;
+				ourFolder = null;
+				ourZip = null;
+				inZip = null;
+			}
+			catch
+			{
+				;
+			}
+			finally
+			{
+				;
+			}
+		}
+	}
+}
+
+
+//////////////////////////////////////
+/////////////////////////////////////
+
+using System;
+using System.Runtime.InteropServices;
+
+namespace ConsoleApplication3
+{
+	/// <summary>
+	/// Summary description for Class1.
+	/// </summary>
+	class Class1
+	{
+		[DllImport("user32.dll",CharSet = CharSet.Auto,SetLastError = true)]
+		public static extern int MessageBox(IntPtr hWnd, string lpText, string lpCaption, uint uType);
+		[DllImport("msvcrt.dll",CharSet = CharSet.Ansi,CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+		public static extern int printf(string format, string arg0, string arg1);
+		[STAThread]
+		static void Main(string[] args)
+		{
+			string ss = "%s %s";
+			string hw = "Hellooooooo!";
+			string wh = "Heyyyyyyyyy!";
+			int y = printf(ss,wh,hw);
+			int x = MessageBox(IntPtr.Zero,hw,wh,0);
+		}
+	}
+}
+
+// alCoPaUL,[NaCl],[GIMO],[ZnI],[b8] NYC 2026
+
+/////////////////////////////////////////
+////////////////////////////////////////
+
+using System;
+using System.Drawing;
+using System.Drawing.Imaging;
+
+namespace ConsoleApplication5
+{
+	/// <summary>
+	/// Summary description for Class1.
+	/// </summary>
+	class Class1
+	{
+		/// <summary>
+		/// The main entry point for the application.
+		/// </summary>
+		[STAThread]
+		static void Main(string[] args)
+		{
+			Image img = Image.FromFile(@"c:\meme.jpg");
+			Graphics g = Graphics.FromImage(img);
+			Font font = new Font("Times New Roman", 20, FontStyle.Bold);
+			Brush brush = new SolidBrush(Color.FromArgb(128, Color.White));
+			PointF location = new Point(10,10);
+			g.DrawString("WE ARE THE MEME..", font,brush,location);
+			img.Save(@"c:\mememe.jpg", ImageFormat.Jpeg);
+			g.Dispose();
+			img.Dispose();
+		}
+	}
+}
+
+////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+
+using System;
+using System.Drawing;
+using System.Drawing.Imaging;
+
+namespace ConsoleApplication1
+{
+	/// <summary>
+	/// Summary description for Class1.
+	/// </summary>
+	class Class1
+	{
+		/// <summary>
+		/// The main entry point for the application.
+		/// </summary>
+		[STAThread]
+		static void Main(string[] args)
+		{
+			Bitmap baseImage = new Bitmap(@"C:\ino.jpg");
+			Bitmap watermarkImage = new Bitmap(@"C:\tats.png");
+		    	Graphics g = Graphics.FromImage(baseImage);
+			int x = baseImage.Width - watermarkImage.Width - 10;
+			int y = baseImage.Height - watermarkImage.Height - 10;
+			g.DrawImage(watermarkImage, new Rectangle(x,y,watermarkImage.Width,watermarkImage.Height));
+			baseImage.Save(@"C:\oni.jpg");
+		}
+	}
+}
+
+///////////////////////////////////////////
+//////////////////////////////////////////
