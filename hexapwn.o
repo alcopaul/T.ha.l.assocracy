@@ -1,0 +1,30 @@
+	.text
+	.globl	main
+	.type	main,@function
+main:
+
+	{
+		allocframe(r29,#16):raw
+	}
+
+
+	{
+		r0 = ##str_hello
+	}
+
+
+	{
+		call printf
+	}
+
+
+	{
+		jumpr r31
+		r0 = #0
+		deallocframe
+	}
+
+	.data
+str_hello:
+	.ascii	"Hello, World!"
+	.byte	0
