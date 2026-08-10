@@ -13,7 +13,7 @@
 #
 # WeSoCute.asm, a Hewlett-Packard Precision Architecture Assembly Language Quine
 # by alCoPaUl, HAsAsIN [NaCl], beth GviLLErMo [GIMO], Zelotes ni Isa [ZnI],
-# Brigada Ocho [b8] NYC August 9, 2023
+# Brigada Ocho [b8] NYC August 9, 2026
 #
 # hppa-linux-gnu-as -W -o WeSoCute.o WeSoCute.asm
 # hppa-linux-gnu-gcc -static -o WeSoCute WeSoCute.o -Wl,-z,noexecstack
