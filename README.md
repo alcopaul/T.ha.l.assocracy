@@ -20,6 +20,16 @@
 #
 # FIRST EVER...
 #
+# The Trinity One Cute Violence Band, a DEC Alpha Assembly Language Quine
+# by alCoPaUL, HAsAsIN [NaCl], beth GviLLErMo [GIMO], Zelotes ni Isa [ZnI],
+# Brigada Ocho [b8] NYC August 13, 2026
+#
+# alpha-linux-gnu-as -W -mcmodel=wide -o hello.o hello.asm
+# alpha-linux-gnu-gcc -static -o hello hello.o -Wl,-z,noexecstack
+# qemu-alpha-static -L /usr/alpha-linux-gnu ./hello
+#
+# FIRST EVER..
+#
 # HAsAsIN [NaCl], beth GviLLErMo [GIMO], Zelotes ni Isa [ZnI], Brigada Ocho [b8]
 #
 
